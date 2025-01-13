@@ -3,7 +3,7 @@
 .INTERMEDIATE : inkscape tree
 
 ## make all : regenerate all results.
-all:  main ebook draft release open_report
+all:  main
 
 ## make main : genreate the main pdf
 main: build/main.pdf
@@ -14,7 +14,6 @@ build/%.pdf: %.tex build
 	biber ./build/$(basename $<)
 	xelatex -output-directory="./build" $<
 	xelatex -output-directory="./build" $<
-
 
 clean:
 	# git ls-files --others | xargs gio trash

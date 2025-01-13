@@ -1,0 +1,33 @@
+﻿name: PDF in ubuntu
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Generate Example examples
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install latex (texlive-full)
+        run: |
+          sudo apt install texlive-full
+
+      - name: Make pdf
+        run: |
+          make
+
+      - name: Upload target example
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: examaple docuemnts
+          path: build/main.pdf
